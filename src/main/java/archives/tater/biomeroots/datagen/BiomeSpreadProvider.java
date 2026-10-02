@@ -10,11 +10,13 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.concurrent.CompletableFuture;
 
+import static archives.tater.biomeroots.BiomeSpread.biomeSpread;
 import static net.minecraft.advancements.predicates.BlockPredicate.Builder.block;
 
 public class BiomeSpreadProvider extends FabricDynamicRegistryProvider {
@@ -25,16 +27,27 @@ public class BiomeSpreadProvider extends FabricDynamicRegistryProvider {
     @Override
     protected void configure(HolderLookup.Provider registries, Entries entries) {
         var blocks = registries.lookupOrThrow(Registries.BLOCK);
+        var rootedDirt = block().of(blocks, Blocks.ROOTED_DIRT).build();
 
-        entries.add(ResourceKey.create(BiomeRootsRegistries.BIOME_SPREAD, BiomeRoots.id("dappled_forest")), BiomeSpread.biomeSpread(registries.getOrThrow(Biomes.DAPPLED_FOREST), 10)
+        entries.add(createKey(Biomes.DAPPLED_FOREST), biomeSpread(registries.getOrThrow(Biomes.DAPPLED_FOREST), 10)
                 .plant(block().of(blocks, Blocks.POPLAR_SAPLING))
-                .base(block().of(blocks, Blocks.ROOTED_DIRT))
+                .base(rootedDirt)
+                .build()
+        );
+
+        entries.add(createKey(Biomes.PALE_GARDEN), biomeSpread(registries.getOrThrow(Biomes.PALE_GARDEN), 10)
+                .plant(block().of(blocks, Blocks.PALE_OAK_SAPLING))
+                .base(rootedDirt)
                 .build()
         );
     }
 
+    private static ResourceKey<BiomeSpread> createKey(ResourceKey<Biome> biome) {
+        return ResourceKey.create(BiomeRootsRegistries.BIOME_SPREAD, BiomeRoots.id(biome.identifier().getPath()));
+    }
+
     @Override
     public String getName() {
-        return "Biome Spread";
+        return "Biome Spreads";
     }
 }
