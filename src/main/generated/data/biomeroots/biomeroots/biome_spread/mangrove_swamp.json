@@ -1,0 +1,6 @@
+{
+  "base": "#biomeroots:biome_spread_catalysts",
+  "biome": "minecraft:mangrove_swamp",
+  "plant": "minecraft:mangrove_propagule",
+  "radius": 10
+}

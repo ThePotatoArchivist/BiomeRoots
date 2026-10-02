@@ -1,9 +1,10 @@
 {
   "base": "#biomeroots:biome_spread_catalysts",
   "biome": "minecraft:soul_sand_valley",
-  "plant": [
+  "plant": "minecraft:warped_fungus",
+  "radius": 10,
+  "under": [
     "minecraft:soul_sand",
     "minecraft:soul_soil"
-  ],
-  "radius": 10
+  ]
 }

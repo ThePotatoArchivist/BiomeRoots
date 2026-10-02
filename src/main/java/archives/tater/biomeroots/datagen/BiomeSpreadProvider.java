@@ -108,7 +108,19 @@ public class BiomeSpreadProvider extends FabricDynamicRegistryProvider {
                 .offerTo(entries);
 
         biomeSpread(registries.getOrThrow(Biomes.SOUL_SAND_VALLEY), DEFAULT_RADIUS)
-                .plant(block().of(blocks, Blocks.SOUL_SAND, Blocks.SOUL_SOIL))
+                .plant(block().of(blocks, Blocks.WARPED_FUNGUS))
+                .base(catalysts)
+                .under(block().of(blocks, Blocks.SOUL_SAND, Blocks.SOUL_SOIL))
+                .offerTo(entries);
+
+        biomeSpread(registries.getOrThrow(Biomes.SWAMP), DEFAULT_RADIUS)
+                .plant(block().of(blocks, Blocks.OAK_SAPLING))
+                .base(catalysts)
+                .under(block().of(blocks, Blocks.MUD))
+                .offerTo(entries);
+
+        biomeSpread(registries.getOrThrow(Biomes.MANGROVE_SWAMP), DEFAULT_RADIUS)
+                .plant(block().of(blocks, Blocks.MANGROVE_PROPAGULE))
                 .base(catalysts)
                 .offerTo(entries);
     }
