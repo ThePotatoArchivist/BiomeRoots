@@ -1,0 +1,10 @@
+{
+  "base": "#biomeroots:biome_spread_catalysts",
+  "biome": "minecraft:deep_dark",
+  "plant": [
+    "minecraft:azalea",
+    "minecraft:flowering_azalea"
+  ],
+  "radius": 10,
+  "under": "minecraft:sculk"
+}

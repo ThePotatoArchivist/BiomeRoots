@@ -1,0 +1,10 @@
+{
+  "base": "#biomeroots:biome_spread_catalysts",
+  "biome": "minecraft:basalt_deltas",
+  "plant": [
+    "minecraft:crimson_fungus",
+    "minecraft:warped_fungus"
+  ],
+  "radius": 10,
+  "under": "minecraft:basalt"
+}

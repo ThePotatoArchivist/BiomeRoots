@@ -1,0 +1,10 @@
+{
+  "base": "#biomeroots:biome_spread_catalysts",
+  "biome": "minecraft:lush_caves",
+  "plant": [
+    "minecraft:azalea",
+    "minecraft:flowering_azalea"
+  ],
+  "radius": 10,
+  "under": "#biomeroots:biome_spread_catalysts"
+}

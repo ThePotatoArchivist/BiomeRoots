@@ -1,0 +1,6 @@
+{
+  "base": "#biomeroots:biome_spread_catalysts",
+  "biome": "minecraft:birch_forest",
+  "plant": "minecraft:birch_sapling",
+  "radius": 10
+}

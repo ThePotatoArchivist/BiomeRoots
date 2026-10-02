@@ -1,0 +1,6 @@
+{
+  "base": "#biomeroots:biome_spread_catalysts",
+  "biome": "minecraft:cherry_grove",
+  "plant": "minecraft:cherry_sapling",
+  "radius": 10
+}

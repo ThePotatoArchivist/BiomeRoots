@@ -1,0 +1,7 @@
+{
+  "base": "#biomeroots:biome_spread_catalysts",
+  "biome": "minecraft:wooded_badlands",
+  "plant": "minecraft:oak_sapling",
+  "radius": 10,
+  "under": "minecraft:red_sand"
+}
