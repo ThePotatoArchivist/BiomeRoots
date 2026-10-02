@@ -16,6 +16,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.level.biome.Biome;
 
+import org.jspecify.annotations.Nullable;
+
 import java.util.Comparator;
 import java.util.Optional;
 
@@ -69,7 +71,62 @@ public record BiomeSpread(
                 .max(BY_SPECIFICITY);
     }
 
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     private static boolean orTrue(Optional<BlockPredicate> predicate, ServerLevel level, BlockPos pos) {
         return predicate.map(blockPredicate -> blockPredicate.matches(level, pos)).orElse(true);
+    }
+
+    public static Builder biomeSpread(Holder<Biome> biome, int radius) {
+        return new Builder(biome, radius);
+    }
+
+    public static class Builder {
+        private final Holder<Biome> biome;
+        private final int radius;
+        @Nullable BlockPredicate plant;
+        @Nullable BlockPredicate base;
+        @Nullable BlockPredicate under;
+
+        public Builder(Holder<Biome> biome, int radius) {
+            this.biome = biome;
+            this.radius = radius;
+        }
+
+        public Builder plant(BlockPredicate plant) {
+            this.plant = plant;
+            return this;
+        }
+
+        public Builder plant(BlockPredicate.Builder plant) {
+            return plant(plant.build());
+        }
+
+        public Builder base(BlockPredicate base) {
+            this.base = base;
+            return this;
+        }
+
+        public Builder base(BlockPredicate.Builder base) {
+            return base(base.build());
+        }
+
+        public Builder under(BlockPredicate under) {
+            this.under = under;
+            return this;
+        }
+
+        public Builder under(BlockPredicate.Builder under) {
+            return under(under.build());
+        }
+
+        public BiomeSpread build() {
+            return new BiomeSpread(
+                    biome,
+                    radius,
+                    Optional.ofNullable(plant),
+                    Optional.ofNullable(base),
+                    Optional.ofNullable(under)
+            );
+        }
     }
 }
