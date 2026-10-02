@@ -1,5 +1,5 @@
 {
-  "base": "minecraft:rooted_dirt",
+  "base": "#biomeroots:biome_spread_catalysts",
   "biome": "minecraft:pale_garden",
   "plant": "minecraft:pale_oak_sapling",
   "radius": 10

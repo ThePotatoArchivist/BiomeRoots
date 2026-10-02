@@ -1,5 +1,5 @@
 {
-  "base": "minecraft:rooted_dirt",
+  "base": "#biomeroots:biome_spread_catalysts",
   "biome": "minecraft:dappled_forest",
   "plant": "minecraft:poplar_sapling",
   "radius": 10
