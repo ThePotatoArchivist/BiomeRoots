@@ -1,0 +1,6 @@
+{
+  "base": "minecraft:rooted_dirt",
+  "biome": "minecraft:dappled_forest",
+  "plant": "minecraft:poplar_sapling",
+  "radius": 10
+}
