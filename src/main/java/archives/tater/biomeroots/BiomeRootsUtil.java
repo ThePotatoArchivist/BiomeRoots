@@ -1,5 +1,7 @@
 package archives.tater.biomeroots;
 
+import net.minecraft.resources.Identifier;
+
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Function;
@@ -17,5 +19,9 @@ public interface BiomeRootsUtil {
                     ? 0
                     : 1;
         };
+    }
+
+    static String toShortPath(Identifier id) {
+        return id.getNamespace().equals(Identifier.DEFAULT_NAMESPACE) ? id.getPath() : id.getNamespace() + "/" + id.getPath();
     }
 }
