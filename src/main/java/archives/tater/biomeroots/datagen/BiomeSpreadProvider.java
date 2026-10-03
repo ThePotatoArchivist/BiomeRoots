@@ -50,9 +50,9 @@ public abstract class BiomeSpreadProvider extends FabricDynamicRegistryProvider 
         private final Holder<Biome> biome;
         private final int xzRadius;
         private final int yRadius;
-        @Nullable BlockPredicate plant;
-        @Nullable BlockPredicate base;
-        @Nullable BlockPredicate under;
+        private @Nullable BlockPredicate plant;
+        private @Nullable BlockPredicate base;
+        private @Nullable BlockPredicate under;
 
         public Builder(Entries entries, ResourceKey<Biome> biome, int xzRadius, int yRadius) {
             this.entries = entries;

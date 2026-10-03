@@ -1,7 +1,7 @@
 {
   "base": "#biomeroots:biome_spread_catalysts",
   "biome": "minecraft:badlands",
-  "plant": "minecraft:acacia_sapling",
+  "plant": "minecraft:oak_sapling",
   "under": "minecraft:red_sand",
   "xzRadius": 10,
   "yRadius": 10

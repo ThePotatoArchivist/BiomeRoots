@@ -1,0 +1,8 @@
+{
+  "base": "#biomeroots:biome_spread_catalysts",
+  "biome": "minecraft:ice_spikes",
+  "plant": "minecraft:spruce_sapling",
+  "under": "minecraft:packed_ice",
+  "xzRadius": 10,
+  "yRadius": 10
+}

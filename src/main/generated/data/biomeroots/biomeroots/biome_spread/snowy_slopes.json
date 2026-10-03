@@ -1,0 +1,8 @@
+{
+  "base": "#biomeroots:biome_spread_catalysts",
+  "biome": "minecraft:snowy_slopes",
+  "plant": "minecraft:spruce_sapling",
+  "under": "minecraft:powder_snow",
+  "xzRadius": 10,
+  "yRadius": 10
+}

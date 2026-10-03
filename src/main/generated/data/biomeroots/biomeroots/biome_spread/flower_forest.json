@@ -1,0 +1,11 @@
+{
+  "base": "#biomeroots:biome_spread_catalysts",
+  "biome": "minecraft:flower_forest",
+  "plant": [
+    "minecraft:oak_sapling",
+    "minecraft:birch_sapling"
+  ],
+  "under": "minecraft:bee_nest",
+  "xzRadius": 10,
+  "yRadius": 10
+}

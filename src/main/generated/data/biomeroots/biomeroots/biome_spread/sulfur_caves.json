@@ -1,0 +1,14 @@
+{
+  "base": "#biomeroots:biome_spread_catalysts",
+  "biome": "minecraft:sulfur_caves",
+  "plant": [
+    "minecraft:azalea",
+    "minecraft:flowering_azalea"
+  ],
+  "under": [
+    "minecraft:sulfur",
+    "minecraft:cinnabar"
+  ],
+  "xzRadius": 10,
+  "yRadius": 10
+}

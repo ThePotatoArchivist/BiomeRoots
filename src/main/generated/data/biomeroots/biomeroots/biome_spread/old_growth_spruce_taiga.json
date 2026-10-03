@@ -1,0 +1,8 @@
+{
+  "base": "#biomeroots:biome_spread_catalysts",
+  "biome": "minecraft:old_growth_spruce_taiga",
+  "plant": "minecraft:spruce_sapling",
+  "under": "minecraft:podzol",
+  "xzRadius": 10,
+  "yRadius": 10
+}

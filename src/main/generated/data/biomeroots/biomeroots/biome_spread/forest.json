@@ -1,0 +1,7 @@
+{
+  "base": "#biomeroots:biome_spread_catalysts",
+  "biome": "minecraft:forest",
+  "plant": "minecraft:oak_sapling",
+  "xzRadius": 10,
+  "yRadius": 10
+}

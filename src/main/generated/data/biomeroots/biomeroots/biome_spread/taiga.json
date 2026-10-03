@@ -1,0 +1,7 @@
+{
+  "base": "#biomeroots:biome_spread_catalysts",
+  "biome": "minecraft:taiga",
+  "plant": "minecraft:spruce_sapling",
+  "xzRadius": 10,
+  "yRadius": 10
+}

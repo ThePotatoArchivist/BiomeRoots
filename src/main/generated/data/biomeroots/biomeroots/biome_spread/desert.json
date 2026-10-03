@@ -1,0 +1,8 @@
+{
+  "base": "#biomeroots:biome_spread_catalysts",
+  "biome": "minecraft:desert",
+  "plant": "minecraft:jungle_sapling",
+  "under": "minecraft:sand",
+  "xzRadius": 10,
+  "yRadius": 10
+}

@@ -1,0 +1,8 @@
+{
+  "base": "#biomeroots:biome_spread_catalysts",
+  "biome": "minecraft:savanna_plateau",
+  "plant": "minecraft:acacia_sapling",
+  "under": "minecraft:gravel",
+  "xzRadius": 10,
+  "yRadius": 10
+}

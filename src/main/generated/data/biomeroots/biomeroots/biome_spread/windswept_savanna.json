@@ -1,0 +1,8 @@
+{
+  "base": "#biomeroots:biome_spread_catalysts",
+  "biome": "minecraft:windswept_savanna",
+  "plant": "minecraft:acacia_sapling",
+  "under": "minecraft:coarse_dirt",
+  "xzRadius": 10,
+  "yRadius": 10
+}

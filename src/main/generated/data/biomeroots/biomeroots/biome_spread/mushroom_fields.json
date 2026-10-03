@@ -1,0 +1,11 @@
+{
+  "base": "minecraft:mycelium",
+  "biome": "minecraft:mushroom_fields",
+  "plant": [
+    "minecraft:red_mushroom",
+    "minecraft:brown_mushroom"
+  ],
+  "under": "minecraft:rooted_dirt",
+  "xzRadius": 10,
+  "yRadius": 10
+}

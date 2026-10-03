@@ -1,0 +1,11 @@
+{
+  "base": "#biomeroots:biome_spread_catalysts",
+  "biome": "minecraft:nether_wastes",
+  "plant": [
+    "minecraft:crimson_fungus",
+    "minecraft:warped_fungus"
+  ],
+  "under": "minecraft:netherrack",
+  "xzRadius": 10,
+  "yRadius": 10
+}
