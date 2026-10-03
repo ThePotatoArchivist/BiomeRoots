@@ -293,7 +293,5 @@ public class ModBiomeSpreadProvider extends BiomeSpreadProvider {
                 .base(catalysts)
                 .under(Blocks.BASALT)
                 .save();
-
-        sanityCheck();
     }
 }

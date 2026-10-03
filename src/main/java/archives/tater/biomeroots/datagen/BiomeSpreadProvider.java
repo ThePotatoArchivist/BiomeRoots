@@ -45,23 +45,6 @@ public abstract class BiomeSpreadProvider extends FabricDynamicRegistryProvider 
         return biomeSpread(entries, biome, radius, radius);
     }
 
-    /**
-     * Should call at the end of {@link #configure}
-     */
-    protected void sanityCheck() {
-        for (var check : biomeSpreads) {
-            for (var other : biomeSpreads) {
-                if (check == other) continue;
-                if (BiomeSpread.BY_SPECIFICITY.compare(check.value(), other.value()) != 0) continue;
-                if (
-                        hasOverlap(check.value().plant(), other.value().plant()) &&
-                        hasOverlap(check.value().base(), other.value().base()) &&
-                        hasOverlap(check.value().under(), other.value().under())
-                ) throw new IllegalStateException("Ambiguity between " + check.key().identifier() + " and " + other.key().identifier());
-            }
-        }
-    }
-
     @Override
     public String getName() {
         return "Biome Spreads";
@@ -172,6 +155,16 @@ public abstract class BiomeSpreadProvider extends FabricDynamicRegistryProvider 
 
         public void save(ResourceKey<BiomeSpread> key) {
             var biomeSpread = build();
+
+            for (var other : biomeSpreads) {
+                if (BiomeSpread.BY_SPECIFICITY.compare(biomeSpread, other.value()) != 0) continue;
+                if (
+                        hasOverlap(biomeSpread.plant(), other.value().plant()) &&
+                        hasOverlap(biomeSpread.base(), other.value().base()) &&
+                        hasOverlap(biomeSpread.under(), other.value().under())
+                ) throw new IllegalStateException("Ambiguity between " + key.identifier() + " and " + other.key().identifier());
+            }
+
             entries.add(key, biomeSpread);
             biomeSpreads.add(Pair.of(key, biomeSpread));
         }
