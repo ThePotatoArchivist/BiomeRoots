@@ -2,6 +2,7 @@
   "base": "#biomeroots:biome_spread_catalysts",
   "biome": "minecraft:bamboo_jungle",
   "plant": "minecraft:jungle_sapling",
-  "radius": 10,
-  "under": "minecraft:bamboo_block"
+  "under": "minecraft:bamboo_block",
+  "xzRadius": 10,
+  "yRadius": 10
 }

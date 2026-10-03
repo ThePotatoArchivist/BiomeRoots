@@ -5,6 +5,7 @@
     "minecraft:azalea",
     "minecraft:flowering_azalea"
   ],
-  "radius": 10,
-  "under": "minecraft:sculk"
+  "under": "minecraft:sculk",
+  "xzRadius": 10,
+  "yRadius": 10
 }

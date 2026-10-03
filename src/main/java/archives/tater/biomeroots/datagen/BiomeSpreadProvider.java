@@ -27,14 +27,16 @@ import static net.minecraft.advancements.predicates.BlockPredicate.Builder.block
 
 public abstract class BiomeSpreadProvider extends FabricDynamicRegistryProvider {
 
-    public static final int DEFAULT_RADIUS = 10;
-
     public BiomeSpreadProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 
+    public static Builder biomeSpread(Entries entries, ResourceKey<Biome> biome, int xzRadius, int yRadius) {
+        return new Builder(entries, biome, xzRadius, yRadius);
+    }
+
     public static Builder biomeSpread(Entries entries, ResourceKey<Biome> biome, int radius) {
-        return new Builder(entries, biome, radius);
+        return biomeSpread(entries, biome, radius, radius);
     }
 
     @Override
@@ -46,18 +48,20 @@ public abstract class BiomeSpreadProvider extends FabricDynamicRegistryProvider 
         private final Entries entries;
         private final HolderLookup<Block> blocks;
         private final Holder<Biome> biome;
-        private final int radius;
+        private final int xzRadius;
+        private final int yRadius;
         @Nullable BlockPredicate plant;
         @Nullable BlockPredicate base;
         @Nullable BlockPredicate under;
 
-        public Builder(Entries entries, ResourceKey<Biome> biome, int radius) {
+        public Builder(Entries entries, ResourceKey<Biome> biome, int xzRadius, int yRadius) {
             this.entries = entries;
             var registries = entries.getLookups();
             blocks = registries.lookupOrThrow(Registries.BLOCK);
 
             this.biome = registries.getOrThrow(biome);
-            this.radius = radius;
+            this.xzRadius = xzRadius;
+            this.yRadius = yRadius;
         }
 
         public Builder plant(BlockPredicate predicate) {
@@ -114,7 +118,8 @@ public abstract class BiomeSpreadProvider extends FabricDynamicRegistryProvider 
         public BiomeSpread build() {
             return new BiomeSpread(
                     biome,
-                    radius,
+                    xzRadius,
+                    yRadius,
                     Optional.ofNullable(plant),
                     Optional.ofNullable(base),
                     Optional.ofNullable(under)

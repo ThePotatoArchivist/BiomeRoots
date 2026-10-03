@@ -5,6 +5,7 @@
     "minecraft:crimson_fungus",
     "minecraft:warped_fungus"
   ],
-  "radius": 10,
-  "under": "minecraft:basalt"
+  "under": "minecraft:basalt",
+  "xzRadius": 10,
+  "yRadius": 10
 }

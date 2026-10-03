@@ -5,6 +5,7 @@
     "minecraft:azalea",
     "minecraft:flowering_azalea"
   ],
-  "radius": 10,
-  "under": "#biomeroots:biome_spread_catalysts"
+  "under": "#biomeroots:biome_spread_catalysts",
+  "xzRadius": 10,
+  "yRadius": 10
 }

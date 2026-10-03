@@ -24,7 +24,8 @@ import static java.util.function.Function.identity;
 
 public record BiomeSpread(
         Holder<Biome> biome,
-        int radius,
+        int xzRadius,
+        int yRadius,
         Optional<BlockPredicate> plant,
         Optional<BlockPredicate> base,
         Optional<BlockPredicate> under
@@ -41,7 +42,8 @@ public record BiomeSpread(
 
     public static final Codec<BiomeSpread> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Biome.CODEC.fieldOf("biome").forGetter(BiomeSpread::biome),
-            ExtraCodecs.POSITIVE_INT.fieldOf("radius").forGetter(BiomeSpread::radius),
+            ExtraCodecs.POSITIVE_INT.fieldOf("xzRadius").forGetter(BiomeSpread::xzRadius),
+            ExtraCodecs.POSITIVE_INT.fieldOf("yRadius").forGetter(BiomeSpread::yRadius),
             SHORT_BLOCK_PREDICATE_CODEC.optionalFieldOf("plant").forGetter(BiomeSpread::plant),
             SHORT_BLOCK_PREDICATE_CODEC.optionalFieldOf("base").forGetter(BiomeSpread::base),
             SHORT_BLOCK_PREDICATE_CODEC.optionalFieldOf("under").forGetter(BiomeSpread::under)
@@ -58,7 +60,7 @@ public record BiomeSpread(
     }
 
     public void spread(ServerLevel level, BlockPos pos) {
-        FillBiomeCommand.fill(level, pos.offset(-radius, -radius, -radius), pos.offset(radius, radius, radius), biome);
+        FillBiomeCommand.fill(level, pos.offset(-xzRadius, -yRadius, -xzRadius), pos.offset(xzRadius, yRadius, xzRadius), biome);
     }
 
     public static Optional<BiomeSpread> getFirstMatching(ServerLevel level, BlockPos pos) {

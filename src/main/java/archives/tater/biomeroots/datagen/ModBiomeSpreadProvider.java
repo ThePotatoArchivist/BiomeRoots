@@ -13,6 +13,8 @@ import java.util.concurrent.CompletableFuture;
 
 public class ModBiomeSpreadProvider extends BiomeSpreadProvider {
 
+    public static final int DEFAULT_RADIUS = 10;
+
     public ModBiomeSpreadProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
@@ -116,5 +118,4 @@ public class ModBiomeSpreadProvider extends BiomeSpreadProvider {
                 .base(catalysts)
                 .save();
     }
-
 }

@@ -2,5 +2,6 @@
   "base": "#biomeroots:biome_spread_catalysts",
   "biome": "minecraft:birch_forest",
   "plant": "minecraft:birch_sapling",
-  "radius": 10
+  "xzRadius": 10,
+  "yRadius": 10
 }

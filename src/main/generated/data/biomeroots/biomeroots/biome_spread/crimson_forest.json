@@ -2,5 +2,6 @@
   "base": "#biomeroots:biome_spread_catalysts",
   "biome": "minecraft:crimson_forest",
   "plant": "minecraft:crimson_fungus",
-  "radius": 10
+  "xzRadius": 10,
+  "yRadius": 10
 }
