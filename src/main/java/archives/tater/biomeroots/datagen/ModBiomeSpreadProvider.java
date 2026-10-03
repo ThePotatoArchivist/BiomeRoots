@@ -294,5 +294,6 @@ public class ModBiomeSpreadProvider extends BiomeSpreadProvider {
                 .under(Blocks.BASALT)
                 .save();
 
+        sanityCheck();
     }
 }
