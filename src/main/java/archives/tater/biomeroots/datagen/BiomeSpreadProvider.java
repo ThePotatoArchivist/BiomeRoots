@@ -1,22 +1,31 @@
 package archives.tater.biomeroots.datagen;
 
-import archives.tater.biomeroots.registry.BiomeRootsBlockTags;
+import archives.tater.biomeroots.BiomeRoots;
+import archives.tater.biomeroots.BiomeSpread;
+import archives.tater.biomeroots.registry.BiomeRootsRegistries;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 
+import net.minecraft.advancements.predicates.BlockPredicate;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Block;
 
+import org.jspecify.annotations.Nullable;
+
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
-import static archives.tater.biomeroots.BiomeSpread.biomeSpread;
+import static archives.tater.biomeroots.BiomeRootsUtil.toShortPath;
 import static net.minecraft.advancements.predicates.BlockPredicate.Builder.block;
 
-public class BiomeSpreadProvider extends FabricDynamicRegistryProvider {
+public abstract class BiomeSpreadProvider extends FabricDynamicRegistryProvider {
 
     public static final int DEFAULT_RADIUS = 10;
 
@@ -24,109 +33,108 @@ public class BiomeSpreadProvider extends FabricDynamicRegistryProvider {
         super(output, registriesFuture);
     }
 
-    @Override
-    protected void configure(HolderLookup.Provider registries, Entries entries) {
-        var blocks = registries.lookupOrThrow(Registries.BLOCK);
-        var catalysts = block().of(blocks, BiomeRootsBlockTags.BIOME_SPREAD_CATALYSTS).build();
-
-        biomeSpread(registries.getOrThrow(Biomes.DAPPLED_FOREST), DEFAULT_RADIUS)
-                .plant(block().of(blocks, Blocks.POPLAR_SAPLING))
-                .base(catalysts)
-                .offerTo(entries);
-
-        biomeSpread(registries.getOrThrow(Biomes.PALE_GARDEN), DEFAULT_RADIUS)
-                .plant(block().of(blocks, Blocks.PALE_OAK_SAPLING))
-                .base(catalysts)
-                .offerTo(entries);
-
-        biomeSpread(registries.getOrThrow(Biomes.BADLANDS), DEFAULT_RADIUS)
-                .plant(block().of(blocks, Blocks.ACACIA_SAPLING))
-                .base(catalysts)
-                .under(block().of(blocks, Blocks.RED_SAND))
-                .offerTo(entries);
-
-        biomeSpread(registries.getOrThrow(Biomes.ERODED_BADLANDS), DEFAULT_RADIUS)
-                .plant(block().of(blocks, Blocks.ACACIA_SAPLING))
-                .base(catalysts)
-                .under(block().of(blocks, BlockTags.TERRACOTTA))
-                .offerTo(entries);
-
-        biomeSpread(registries.getOrThrow(Biomes.WOODED_BADLANDS), DEFAULT_RADIUS)
-                .plant(block().of(blocks, Blocks.OAK_SAPLING))
-                .base(catalysts)
-                .under(block().of(blocks, Blocks.RED_SAND))
-                .offerTo(entries);
-
-        biomeSpread(registries.getOrThrow(Biomes.BAMBOO_JUNGLE), DEFAULT_RADIUS)
-                .plant(block().of(blocks, Blocks.JUNGLE_SAPLING))
-                .base(catalysts)
-                .under(block().of(blocks, Blocks.BAMBOO_BLOCK))
-                .offerTo(entries);
-
-        biomeSpread(registries.getOrThrow(Biomes.LUSH_CAVES), DEFAULT_RADIUS)
-                .plant(block().of(blocks, Blocks.AZALEA, Blocks.FLOWERING_AZALEA))
-                .base(catalysts)
-                .under(catalysts)
-                .offerTo(entries);
-
-        biomeSpread(registries.getOrThrow(Biomes.DRIPSTONE_CAVES), DEFAULT_RADIUS)
-                .plant(block().of(blocks, Blocks.AZALEA, Blocks.FLOWERING_AZALEA))
-                .base(catalysts)
-                .under(block().of(blocks, Blocks.DRIPSTONE_BLOCK))
-                .offerTo(entries);
-
-        biomeSpread(registries.getOrThrow(Biomes.DEEP_DARK), DEFAULT_RADIUS)
-                .plant(block().of(blocks, Blocks.AZALEA, Blocks.FLOWERING_AZALEA))
-                .base(catalysts)
-                .under(block().of(blocks, Blocks.SCULK))
-                .offerTo(entries);
-
-        biomeSpread(registries.getOrThrow(Biomes.BASALT_DELTAS), DEFAULT_RADIUS)
-                .plant(block().of(blocks, Blocks.CRIMSON_FUNGUS, Blocks.WARPED_FUNGUS))
-                .base(catalysts)
-                .under(block().of(blocks, Blocks.BASALT))
-                .offerTo(entries);
-
-        biomeSpread(registries.getOrThrow(Biomes.BIRCH_FOREST), DEFAULT_RADIUS)
-                .plant(block().of(blocks, Blocks.BIRCH_SAPLING))
-                .base(catalysts)
-                .offerTo(entries);
-
-        biomeSpread(registries.getOrThrow(Biomes.CHERRY_GROVE), DEFAULT_RADIUS)
-                .plant(block().of(blocks, Blocks.CHERRY_SAPLING))
-                .base(catalysts)
-                .offerTo(entries);
-
-        biomeSpread(registries.getOrThrow(Biomes.CRIMSON_FOREST), DEFAULT_RADIUS)
-                .plant(block().of(blocks, Blocks.CRIMSON_FUNGUS))
-                .base(catalysts)
-                .offerTo(entries);
-
-        biomeSpread(registries.getOrThrow(Biomes.WARPED_FOREST), DEFAULT_RADIUS)
-                .plant(block().of(blocks, Blocks.WARPED_FUNGUS))
-                .base(catalysts)
-                .offerTo(entries);
-
-        biomeSpread(registries.getOrThrow(Biomes.SOUL_SAND_VALLEY), DEFAULT_RADIUS)
-                .plant(block().of(blocks, Blocks.WARPED_FUNGUS))
-                .base(catalysts)
-                .under(block().of(blocks, Blocks.SOUL_SAND, Blocks.SOUL_SOIL))
-                .offerTo(entries);
-
-        biomeSpread(registries.getOrThrow(Biomes.SWAMP), DEFAULT_RADIUS)
-                .plant(block().of(blocks, Blocks.OAK_SAPLING))
-                .base(catalysts)
-                .under(block().of(blocks, Blocks.MUD))
-                .offerTo(entries);
-
-        biomeSpread(registries.getOrThrow(Biomes.MANGROVE_SWAMP), DEFAULT_RADIUS)
-                .plant(block().of(blocks, Blocks.MANGROVE_PROPAGULE))
-                .base(catalysts)
-                .offerTo(entries);
+    public static Builder biomeSpread(Entries entries, ResourceKey<Biome> biome, int radius) {
+        return new Builder(entries, biome, radius);
     }
 
     @Override
     public String getName() {
         return "Biome Spreads";
+    }
+
+    public static class Builder {
+        private final Entries entries;
+        private final HolderLookup<Block> blocks;
+        private final Holder<Biome> biome;
+        private final int radius;
+        @Nullable BlockPredicate plant;
+        @Nullable BlockPredicate base;
+        @Nullable BlockPredicate under;
+
+        public Builder(Entries entries, ResourceKey<Biome> biome, int radius) {
+            this.entries = entries;
+            var registries = entries.getLookups();
+            blocks = registries.lookupOrThrow(Registries.BLOCK);
+
+            this.biome = registries.getOrThrow(biome);
+            this.radius = radius;
+        }
+
+        public Builder plant(BlockPredicate predicate) {
+            this.plant = predicate;
+            return this;
+        }
+
+        public Builder plant(BlockPredicate.Builder predicate) {
+            return plant(predicate.build());
+        }
+
+        public Builder plant(Block... blocks) {
+            return plant(block().of(this.blocks, blocks));
+        }
+
+        public Builder plant(TagKey<Block> blocks) {
+            return plant(block().of(this.blocks, blocks));
+        }
+
+        public Builder base(BlockPredicate predicate) {
+            this.base = predicate;
+            return this;
+        }
+
+        public Builder base(BlockPredicate.Builder predicate) {
+            return base(predicate.build());
+        }
+
+        public Builder base(Block... blocks) {
+            return base(block().of(this.blocks, blocks));
+        }
+
+        public Builder base(TagKey<Block> blocks) {
+            return base(block().of(this.blocks, blocks));
+        }
+
+        public Builder under(BlockPredicate predicate) {
+            this.under = predicate;
+            return this;
+        }
+
+        public Builder under(BlockPredicate.Builder predicate) {
+            return under(predicate.build());
+        }
+
+        public Builder under(Block... blocks) {
+            return under(block().of(this.blocks, blocks));
+        }
+
+        public Builder under(TagKey<Block> blocks) {
+            return under(block().of(this.blocks, blocks));
+        }
+
+        public BiomeSpread build() {
+            return new BiomeSpread(
+                    biome,
+                    radius,
+                    Optional.ofNullable(plant),
+                    Optional.ofNullable(base),
+                    Optional.ofNullable(under)
+            );
+        }
+
+        public void save() {
+            save(createKeyFor(biome.unwrapKey().orElseThrow()));
+        }
+
+        public void save(Identifier id) {
+            save(ResourceKey.create(BiomeRootsRegistries.BIOME_SPREAD, id));
+        }
+
+        public void save(ResourceKey<BiomeSpread> key) {
+            entries.add(key, build());
+        }
+
+        public static ResourceKey<BiomeSpread> createKeyFor(ResourceKey<Biome> biome) {
+            return ResourceKey.create(BiomeRootsRegistries.BIOME_SPREAD, BiomeRoots.id(toShortPath(biome.identifier())));
+        }
     }
 }

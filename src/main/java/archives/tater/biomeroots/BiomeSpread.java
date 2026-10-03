@@ -2,8 +2,6 @@ package archives.tater.biomeroots;
 
 import archives.tater.biomeroots.registry.BiomeRootsRegistries;
 
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
-
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -13,19 +11,15 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.registries.codec.RegistryCodecs;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.commands.FillBiomeCommand;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.level.biome.Biome;
 
-import org.jspecify.annotations.Nullable;
-
 import java.util.Comparator;
 import java.util.Optional;
 
 import static archives.tater.biomeroots.BiomeRootsUtil.compareByPresence;
-import static archives.tater.biomeroots.BiomeRootsUtil.toShortPath;
 import static java.util.function.Function.identity;
 
 public record BiomeSpread(
@@ -75,70 +69,8 @@ public record BiomeSpread(
                 .max(BY_SPECIFICITY);
     }
 
-    public static ResourceKey<BiomeSpread> createKeyFor(ResourceKey<Biome> biome) {
-        return ResourceKey.create(BiomeRootsRegistries.BIOME_SPREAD, BiomeRoots.id(toShortPath(biome.identifier())));
-    }
-
     @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     private static boolean orTrue(Optional<BlockPredicate> predicate, ServerLevel level, BlockPos pos) {
         return predicate.map(blockPredicate -> blockPredicate.matches(level, pos)).orElse(true);
-    }
-
-    public static Builder biomeSpread(Holder<Biome> biome, int radius) {
-        return new Builder(biome, radius);
-    }
-
-    public static class Builder {
-        private final Holder<Biome> biome;
-        private final int radius;
-        @Nullable BlockPredicate plant;
-        @Nullable BlockPredicate base;
-        @Nullable BlockPredicate under;
-
-        public Builder(Holder<Biome> biome, int radius) {
-            this.biome = biome;
-            this.radius = radius;
-        }
-
-        public Builder plant(BlockPredicate plant) {
-            this.plant = plant;
-            return this;
-        }
-
-        public Builder plant(BlockPredicate.Builder plant) {
-            return plant(plant.build());
-        }
-
-        public Builder base(BlockPredicate base) {
-            this.base = base;
-            return this;
-        }
-
-        public Builder base(BlockPredicate.Builder base) {
-            return base(base.build());
-        }
-
-        public Builder under(BlockPredicate under) {
-            this.under = under;
-            return this;
-        }
-
-        public Builder under(BlockPredicate.Builder under) {
-            return under(under.build());
-        }
-
-        public BiomeSpread build() {
-            return new BiomeSpread(
-                    biome,
-                    radius,
-                    Optional.ofNullable(plant),
-                    Optional.ofNullable(base),
-                    Optional.ofNullable(under)
-            );
-        }
-
-        public void offerTo(FabricDynamicRegistryProvider.Entries entries) {
-            entries.add(createKeyFor(biome.unwrapKey().orElseThrow()), build());
-        }
     }
 }
